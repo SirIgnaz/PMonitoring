@@ -23,6 +23,8 @@ if($testPath -eq "False"){
         New-Item -Path $installPath/PMonitoring -ItemType Directory
         New-Item -Path $installPath/PMonitoring/Config -ItemType Directory
         New-Item -Path $installPath/PMonitoring/Scripts -ItemType Directory
+        New-Item -Path $installPath/PMonitoring/"Data" -ItemType Directory
+        New-Item -Path $installPath/PMonitoring/Modules -ItemType Directory
     }
     catch {
         Write-Host "Unable to write to path" -ForegroundColor Red
@@ -32,4 +34,14 @@ if($testPath -eq "False"){
 # Create Config
 
 # Download scripts
+
+# Module Path
+#Save the current value in the $p variable.
+$modulePath = [Environment]::GetEnvironmentVariable("PSModulePath")
+
+#Add the new path to the $p variable. Begin with a semi-colon separator.
+$modulePath += "$installPath/PMonitoring/Modules"
+
+#Add the paths in $p to the PSModulePath value.
+[Environment]::SetEnvironmentVariable("PSModulePath",$modulePath)
 
