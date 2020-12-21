@@ -5,8 +5,8 @@ param (
     $Target
 )
 /**
- * @author [BraunS]
- * @email [example@mail.com]
+ * @author [SirIgnaz]
+ * @email [sirignaz@mailbox.org]
  * @create date 2020-12-16 10:53:44
  * @modify date 2020-12-16 10:53:44
  * @desc [Script to get some infos of the current connection]
