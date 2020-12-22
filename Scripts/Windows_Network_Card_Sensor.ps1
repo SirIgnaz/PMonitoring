@@ -1,2 +1,0 @@
-Get-NetAdapter
-Get-NetAdapterStatistics
