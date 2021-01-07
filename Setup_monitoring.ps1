@@ -1,10 +1,21 @@
-#############
-# Variables #
-#############
-$configFileName = "Config.xml"
+#Requires -Version 7
+Import-Module PSSQLite
 
-# Check Powershell Version
-$psVersion = $PSVersionTable.PSVersion
+# Variables
+$DeviceDBPath = ".\DB\PMonitoring.db"
+
+# SQL Queries
+$CreateDeviceQuery = 'CREATE TABLE "Devices" ("ID"	INTEGER NOT NULL UNIQUE, "DeviceName"	TEXT NOT NULL, PRIMARY KEY("ID" AUTOINCREMENT))'
+$CreateConnectionSensorQuery = 'CREATE TABLE ConnectionSensor( ID INTEGER, Destination TEXT, ResolveDestination TEXT, MTUSize INTEGER, DeviceID INTEGER, FOREIGN KEY(DeviceID) REFERENCES Devices(ID))'
+
+if( Test-Path $DeviceDBPath){
+    Write-Host "$DeviceDBPath already exists!"
+}
+else {
+    Invoke-SqliteQuery -DataSource $DeviceDBPath -Query $CreateDeviceQuery
+    Invoke-SqliteQuery -DataSource $DeviceDBPath -Query $CreateConnectionSensorQuery
+}
+
 
 # Welcome Screen
 
